@@ -13,8 +13,8 @@ interface IDropdown {
 export default function Dropdown(props: IDropdown){
     const [isOpen, setIsOpen] = useState<boolean>(props.title.includes("VisualCyber"))
 
-    const toggle = () => {
-        setIsOpen(old => !old)
+    function toggle() {
+        setIsOpen(!isOpen)
     }
 
     return (

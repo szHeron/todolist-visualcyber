@@ -15,7 +15,7 @@ export interface ITodo {
   tasks: ITasks[],
   author: string,
   status: string,
-  createdAt: Date
+  endAt: Date
 }
 
 export default function Home() {

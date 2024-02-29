@@ -26,7 +26,7 @@ const initialTasks = [
         ],
         author: "Heron",
         status: "done",
-        createdAt: new Date('2024,02,26')
+        endAt: new Date('2024,02,26')
     },
     {
         id: 2,
@@ -48,7 +48,7 @@ const initialTasks = [
         ],
         author: "Rodrigues",
         status: "done",
-        createdAt: new Date('2024,02,26')
+        endAt: new Date('2024,02,26')
     }
 ];
 

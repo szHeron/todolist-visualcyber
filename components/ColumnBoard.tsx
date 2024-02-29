@@ -26,7 +26,7 @@ export default function ColumnBoard(props: IColumnBoard){
     return (
         <Droppable droppableId={props.id}>
             {(provided) => (
-                <div
+                <div 
                     className="flex flex-col items-center p-4 rounded-lg bg-zinc-900 w-[30%]"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
