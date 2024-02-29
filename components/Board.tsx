@@ -13,11 +13,11 @@ const initialTasks = [
         tasks: [
             {
                 title: "1",
-                completed: false
+                completed: true
             },
             {
                 title: "2",
-                completed: true
+                completed: false
             },
             {
                 title: "3",
@@ -25,7 +25,7 @@ const initialTasks = [
             },
         ],
         author: "Heron",
-        status: "in_progress",
+        status: "done",
         createdAt: new Date('2024,02,26')
     },
     {
@@ -35,11 +35,11 @@ const initialTasks = [
         tasks: [
             {
                 title: "1",
-                completed: false
+                completed: true
             },
             {
                 title: "2",
-                completed: true
+                completed: false
             },
             {
                 title: "3",
@@ -49,21 +49,29 @@ const initialTasks = [
         author: "Rodrigues",
         status: "done",
         createdAt: new Date('2024,02,26')
-    },
+    }
 ];
 
 export default function Board(){
     const [tasks, setTasks] = useState<ITodo[]>(initialTasks);
 
-    const onDragEnd = (result:any) => {}
+    const onDragEnd = (result:any) => {
+        if(!result.destination) return null
+        let newTasks = [...tasks]
+        newTasks[result.source.index].status = result.destination.droppableId
+        const element = newTasks.splice(result.source.index, 1)[0];
+        newTasks.splice(result.destination.index, 0, element);
+
+        setTasks(newTasks)
+    }
 
     return (
         <div className="flex h-full">
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="flex flex-row w-full h-full justify-around p-2">
-                    <ColumnBoard id="todo" title="A fazer" todos={tasks.filter(todo => todo.status.includes("todo"))}/>
-                    <ColumnBoard id="in_progress" title="Em progresso" todos={tasks.filter(todo => todo.status.includes("in_progress"))}/>
-                    <ColumnBoard id="done" title="Feito" todos={tasks.filter(todo => todo.status.includes("done"))}/>
+                    <ColumnBoard id="todo" title="A fazer" todos={tasks}/>
+                    <ColumnBoard id="in_progress" title="Em progresso" todos={tasks}/>
+                    <ColumnBoard id="done" title="Feito" todos={tasks}/>
                 </div>
             </DragDropContext>
         </div>
