@@ -59,7 +59,6 @@ export default function ColumnBoard(props: IColumnBoard){
                     ))}
                     {openModal && (
                         <div
-                            onClick={handleCloseModal}
                             className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50"
                         >
                             <TodoModal

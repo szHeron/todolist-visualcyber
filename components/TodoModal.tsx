@@ -29,10 +29,12 @@ export default function TodoModal(props: ITodoModal){
     }
 
     function addNewSubTask(){
-        const tasks = [...task.tasks]
-        tasks.push(subTask)
-        setTask({...task, tasks: tasks})
-        setSubTask({title: "", completed: false, id:0})
+        if(subTask.title.length > 3){
+            const tasks = [...task.tasks]
+            tasks.push({...subTask, id: Math.floor(Math.random() * (100000 - 10 + 1)) + 10,})
+            setTask({...task, tasks: tasks})
+            setSubTask({title: "", completed: false, id:0})
+        }
     }
 
     function editSubTask(editedTask: ITasks){
@@ -86,12 +88,12 @@ export default function TodoModal(props: ITodoModal){
                 <div className="flex flex-col mb-2">
                     <label className="block mb-2 text-sm font-medium dark:text-white">Crie uma nova sub tarefa</label>
                     <div className="flex flew-row gap-2">
-                        <input onChange={text => setSubTask({...subTask, title: text.target.value})} type="text" className="bg-zinc-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tarefa 1" />
+                        <input onChange={text => setSubTask({...subTask, title: text.target.value})} value={subTask.title} type="text" className="bg-zinc-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tarefa 1" />
                         <button onClick={addNewSubTask} type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">Criar</button>
                     </div>
                 </div>
                 <label className="block mb-2 text-sm font-medium dark:text-white">Sub Tarefas</label>
-                <div className="flex flex-col mb-4 max-h-32 overflow-y-scroll border-zinc-600 border-2 p-2 rounded-xl">
+                <div className="flex flex-col mb-4 min-h-32 max-h-32 overflow-y-scroll border-zinc-600 border-2 p-2 rounded-xl">
                     {task.tasks.map((item, index) => {
                         return (
                             <div key={index} className="flex flex-row my-1">
