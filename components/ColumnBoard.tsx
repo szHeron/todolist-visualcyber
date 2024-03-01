@@ -5,9 +5,10 @@ import { Droppable } from "react-beautiful-dnd";
 import TodoCard from "./TodoCard";
 
 interface IColumnBoard {
-    id: string,
-    title: string,
-    todos: ITodo[]
+    id: string;
+    title: string;
+    todos: ITodo[];
+    handleEditTask: (editedTask: ITodo) => void;
 }
 
 interface IColumnTask extends ITodo {
@@ -35,7 +36,7 @@ export default function ColumnBoard(props: IColumnBoard){
                         {props.title}
                     </p>
                     {tasks.map((todo) => (
-                        <TodoCard key={todo.id} index={todo.arrayIndex} {...todo} />
+                        <TodoCard key={todo.id} index={todo.arrayIndex} task={todo} handleEditTask={props.handleEditTask} />
                     ))}
                     {provided.placeholder}
                 </div>

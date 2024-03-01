@@ -3,19 +3,19 @@ import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Projects from "@/components/Projects";
 
-interface ITasks {
-  title: string,
-  completed: boolean
+export interface ITasks {
+  id: number;
+  title: string;
+  completed: boolean;
 }
 
 export interface ITodo {
-  id: number,
-  title: string,
-  description: string,
-  tasks: ITasks[],
-  author: string,
-  status: string,
-  endAt: Date
+  id: number;
+  title: string;
+  description: string;
+  tasks: ITasks[];
+  author: string;
+  status: string;
 }
 
 export default function Home() {
