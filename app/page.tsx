@@ -19,7 +19,7 @@ export interface ITodo {
 
 export default function Home() {
   return (
-    <main className="flex flex-row h-screen bg-zinc-800 bg">
+    <main className="flex flex-row h-screen bg-zinc-800 overflow-hidden">
       <Navbar/>
       <Projects/>
       <div className="flex flex-col h-full w-full">

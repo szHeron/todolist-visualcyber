@@ -29,7 +29,7 @@ export default function TodoCard(props: ITodoCard){
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
-                    className="flex flex-col bg-zinc-800 h-1/5 w-full rounded-lg p-4 justify-between my-2"
+                    className="flex flex-col bg-zinc-800 min-h-32 w-full rounded-lg p-4 justify-between my-2"
                     onClick={()=>setOpenModal(true)}
                 >
                     <div>

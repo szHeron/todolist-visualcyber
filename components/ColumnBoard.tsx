@@ -36,11 +36,11 @@ export default function ColumnBoard(props: IColumnBoard){
         <Droppable droppableId={props.id}>
             {(provided) => (
                 <div 
-                    className="flex flex-col items-center p-4 rounded-lg bg-zinc-900 w-[30%]"
+                    className="flex flex-col items-center p-2 rounded-lg bg-zinc-900 w-[30%] overflow-y-auto"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                 >
-                    <div className="flex flex-row w-full justify-between items-center mb-4 text-sm">
+                    <div className="flex flex-row w-full justify-between items-center mb-4 text-sm px-2">
                         <p className="text-zinc-500">
                             {props.title}
                         </p>
