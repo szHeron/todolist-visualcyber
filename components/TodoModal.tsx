@@ -3,13 +3,30 @@ import { ITasks, ITodo } from "@/app/page";
 
 interface ITodoModal {
     handleCloseModal: ()=>void;
-    task: ITodo;
+    task?: ITodo;
     handleEditTask: (editedTask: ITodo) => void;
+    handleAddNewTask?: (newTask: ITodo) => void;
 }
 
 export default function TodoModal(props: ITodoModal){
-    const [task, setTask] = useState(props.task)
+    const [task, setTask] = useState<ITodo>(emptyTodo)
     const [subTask, setSubTask] = useState<ITasks>({title: "", completed: false, id: 0})
+
+    function emptyTodo(){
+        if(!props.task){
+            const emptyTodo: ITodo = {
+                id: Math.floor(Math.random() * (100000 - 10 + 1)) + 10,
+                title: "",
+                description: "",
+                status: "todo",
+                tasks: [],
+            }
+            return emptyTodo
+        }else{
+            return props.task
+        }
+        
+    }
 
     function addNewSubTask(){
         const tasks = [...task.tasks]
@@ -36,8 +53,12 @@ export default function TodoModal(props: ITodoModal){
     function save(e: FormEvent){
         e.preventDefault()
 
-        if(props.task.id){
+        if(props.task){
             props.handleEditTask(task)
+        }else{
+            if(props.handleAddNewTask){
+                props.handleAddNewTask(task)
+            }
         }
 
         props.handleCloseModal()
@@ -63,13 +84,13 @@ export default function TodoModal(props: ITodoModal){
                     <input onChange={text => setTask({...task, description: text.target.value})} value={task.description} type="text" className="bg-zinc-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="A fazer" required />
                 </div>
                 <div className="flex flex-col mb-2">
-                    <label className="block mb-2 text-sm font-medium dark:text-white">Crie uma nova tarefa</label>
+                    <label className="block mb-2 text-sm font-medium dark:text-white">Crie uma nova sub tarefa</label>
                     <div className="flex flew-row gap-2">
                         <input onChange={text => setSubTask({...subTask, title: text.target.value})} type="text" className="bg-zinc-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tarefa 1" />
                         <button onClick={addNewSubTask} type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">Criar</button>
                     </div>
                 </div>
-                <label className="block mb-2 text-sm font-medium dark:text-white">Tarefas</label>
+                <label className="block mb-2 text-sm font-medium dark:text-white">Sub Tarefas</label>
                 <div className="flex flex-col mb-4 max-h-32 overflow-y-scroll border-zinc-600 border-2 p-2 rounded-xl">
                     {task.tasks.map((item, index) => {
                         return (

@@ -14,7 +14,6 @@ export interface ITodo {
   title: string;
   description: string;
   tasks: ITasks[];
-  author: string;
   status: string;
 }
 

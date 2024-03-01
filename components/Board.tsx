@@ -27,7 +27,6 @@ const initialTasks = [
                 completed: false
             }
         ],
-        author: "Heron",
         status: "done"
     },
     {
@@ -51,7 +50,6 @@ const initialTasks = [
                 completed: true
             },
         ],
-        author: "Rodrigues",
         status: "done"
     }
 ];
@@ -92,9 +90,9 @@ export default function Board(){
         <div className="flex h-full">
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="flex flex-row w-full h-full justify-around p-2">
-                    <ColumnBoard id="todo" title="A fazer" todos={tasks} handleEditTask={handleEditTask}/>
-                    <ColumnBoard id="in_progress" title="Em progresso" todos={tasks} handleEditTask={handleEditTask}/>
-                    <ColumnBoard id="done" title="Feito" todos={tasks} handleEditTask={handleEditTask}/>
+                    <ColumnBoard id="todo" title="A fazer" todos={tasks} handleEditTask={handleEditTask} handleAddNewTask={handleAddNewTask}/>
+                    <ColumnBoard id="in_progress" title="Em progresso" todos={tasks} handleEditTask={handleEditTask} handleAddNewTask={handleAddNewTask}/>
+                    <ColumnBoard id="done" title="Feito" todos={tasks} handleEditTask={handleEditTask} handleAddNewTask={handleAddNewTask}/>
                 </div>
             </DragDropContext>
         </div>
